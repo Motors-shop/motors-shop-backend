@@ -5,21 +5,8 @@ import app from "../../../app";
 
 describe("teste das rotas de projetos", () => {
   let connection: DataSource;
-  let expectedKeys = new Set([
-    "id",
-    "sellType",
-    "title",
-    "description",
-    "year",
-    "km",
-    "price",
-    "type",
-    "isPublished",
-    "capeImage",
-    "createdAt",
-    "updatedAt",
-    "isActive",
-  ]);
+  let newVehicle = {};
+  let expectedKeys = Object.keys(newVehicle);
   let token: string = "";
   let vehicleId: string = "";
   let invalidId: string = "1d27feef-8549-47c7-b576-d6fbcd427a18";
@@ -42,7 +29,7 @@ describe("teste das rotas de projetos", () => {
     const response = await request(app).get(`/vehicles/${vehicleId}`);
 
     expect(response.status).toEqual(200);
-    expect(new Set(Object.keys(response.body))).toEqual(expectedKeys);
+    expect(Object.keys(response.body)).toEqual(expectedKeys);
   });
 
   test("GET - /vehicles/:id - Must not be able to fetch a vehicle with invalid id", async () => {
