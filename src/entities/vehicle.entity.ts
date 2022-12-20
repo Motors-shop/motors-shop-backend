@@ -46,9 +46,6 @@ export class Vehicle {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column()
-  isActive: boolean;
-
   // @ManyToOne(()=> User, {onDelete: "CASCADE"})
   // owner: User; //Sugerindo a relação com a futura entidade User
 
