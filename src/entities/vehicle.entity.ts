@@ -2,11 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  // ManyToOne,
-  // OneToMany,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Commentary } from "./commentary.entity";
+import { Photo } from "./photo.entity";
+import { User } from "./user.entity";
 
 @Entity("vehicles")
 export class Vehicle {
@@ -46,16 +49,16 @@ export class Vehicle {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  // @ManyToOne(()=> User, {onDelete: "CASCADE"})
-  // owner: User; //Sugerindo a relação com a futura entidade User
+  @ManyToOne(() => User, { onDelete: "CASCADE" })
+  owner: User;
 
-  // @OneToMany(() => Photo, (photo) => photo.vehicle, {
-  //   eager: true,
-  // })
-  // photos: Photo[]; //Sugerindo a relação futura com a galeria, que pode ser chamada de Photo
+  @OneToMany(() => Photo, (photo) => photo.vehicle, {
+    eager: true,
+  })
+  photos: Photo[];
 
-  // @OneToMany(() => Commentary, (commentary) => commentary.vehicle {
-  //   eager: true,
-  // })
-  // comments: Commentary[]; //Sugerindo a futura relação com a entidade de comentários
+  @OneToMany(() => Commentary, (commentary) => commentary.vehicle, {
+    eager: true,
+  })
+  comments: Commentary[];
 }
