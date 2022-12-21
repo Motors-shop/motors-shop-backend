@@ -26,7 +26,7 @@ export class Address {
   street: string;
 
   @Column({ length: 5 })
-  number: number;
+  number: string;
 
   @Column({ length: 60 })
   complement: string;
