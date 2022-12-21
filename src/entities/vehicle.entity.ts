@@ -54,7 +54,7 @@ export class Vehicle {
   // })
   // photos: Photo[]; //Sugerindo a relação futura com a galeria, que pode ser chamada de Photo
 
-  // @OneToMany(()=>Commentary, (commentary) => commentary.vehicle {
+  // @OneToMany(() => Commentary, (commentary) => commentary.vehicle {
   //   eager: true,
   // })
   // comments: Commentary[]; //Sugerindo a futura relação com a entidade de comentários
