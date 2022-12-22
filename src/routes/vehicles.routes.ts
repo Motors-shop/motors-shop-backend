@@ -4,7 +4,9 @@ import { deleteVehicleController } from "../controllers/vehicles/deleteVehicle.c
 import { listAllPublishedVehiclesController } from "../controllers/vehicles/listAllPublishedVehicles.controller";
 import { listSessionVehiclesController } from "../controllers/vehicles/listSessionVehicles.controller";
 import { listUserPublishedVehiclesController } from "../controllers/vehicles/listUserPublishedVehicles.controller";
+import { patchVehicleController } from "../controllers/vehicles/patchVehicle.controller";
 import { retrieveVehicleController } from "../controllers/vehicles/retrieveVehicle.controller";
+
 
 const vehiclesRoutes = Router();
 
@@ -13,7 +15,7 @@ vehiclesRoutes.get("", listAllPublishedVehiclesController);
 vehiclesRoutes.get("/:id", retrieveVehicleController);
 vehiclesRoutes.get("/user/:id", listUserPublishedVehiclesController);
 vehiclesRoutes.get("/session/user", listSessionVehiclesController);
-// vehiclesRoutes.patch("/:id", );
+vehiclesRoutes.patch("/:id", patchVehicleController);
 vehiclesRoutes.delete("/:id", deleteVehicleController);
 
 export default vehiclesRoutes;
