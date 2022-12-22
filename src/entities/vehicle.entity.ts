@@ -17,7 +17,7 @@ export class Vehicle {
   id: string;
 
   @Column({ default: "VENDA", length: 12 })
-  sellType: string;
+  sellType: "VENDA" | "LEILAO";
 
   @Column({ length: 150 })
   title: string;
@@ -35,7 +35,7 @@ export class Vehicle {
   price: number;
 
   @Column({ length: 12 })
-  type: string;
+  type: "MOTO" | "CARRO";
 
   @Column({ default: false })
   isPublished: boolean;
