@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { IVehicleRequest } from "../../interfaces/vehicles.interfaces";
 import { createVehicleService } from "../../services/vehicles/createVehicle.service";
 
 export const createVehicleController = async (req: Request, res: Response) => {
