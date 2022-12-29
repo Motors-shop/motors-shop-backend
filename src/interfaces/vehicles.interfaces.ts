@@ -3,7 +3,6 @@ import { Vehicle } from "../entities/vehicle.entity";
 type VehicleRequestOmittedFields =
   | "id"
   | "owner"
-  | "photos"
   | "comments"
   | "sellType"
   | "createdAt"
@@ -12,7 +11,5 @@ type VehicleRequestOmittedFields =
 
 type VehicleRequestOptionalFields = "sellType" | "isPublished";
 
-export type IVehicleRequest = Partial<
-  Pick<Vehicle, VehicleRequestOptionalFields>
-> &
+export type IVehicleRequest = Partial<Pick<Vehicle, VehicleRequestOptionalFields>> &
   Omit<Vehicle, VehicleRequestOmittedFields>;

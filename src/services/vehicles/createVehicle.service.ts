@@ -1,4 +1,5 @@
 import AppDataSource from "../../data-source";
+import { Photo } from "../../entities/photo.entity";
 import { Vehicle } from "../../entities/vehicle.entity";
 import { IVehicleRequest } from "../../interfaces/vehicles.interfaces";
 
@@ -7,15 +8,20 @@ export const createVehicleService = async (
   userId: string
 ): Promise<Vehicle> => {
   const vehicleRepo = AppDataSource.getRepository(Vehicle);
+  const photoRepo = AppDataSource.getRepository(Photo);
   // const userRepo = AppDataSource.getRepository(User);
 
   // const foundUser = await userRepo.findOneBy({ id: userId });
   // if (!foundUser) throw new AppError("Invalid user", 404);
 
   // TODO: use foundUser at `owner`
-  const newVehicle = vehicleRepo.create(vehicle);
+  const newVehicle = await vehicleRepo.save(vehicle);
 
-  const finalVehicle = await vehicleRepo.save(newVehicle);
+  for (let i = 0; i < vehicle.photos.length; i++) {
+    await photoRepo.save({ url: String(vehicle.photos[i]), vehicle: newVehicle });
+  }
 
-  return finalVehicle;
+  const finalVehicle = await vehicleRepo.findOne({ where: { id: newVehicle.id } });
+
+  return finalVehicle!;
 };
