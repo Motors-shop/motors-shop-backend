@@ -13,8 +13,8 @@ export const createCommentService = async (
   const commentRepo = AppDataSource.getRepository(Commentary);
   const vehicleRepo = AppDataSource.getRepository(Vehicle);
 
-  // const user = await userRepo.findOneBy({id:userId})
-  // if (!foundUser) throw new AppError("Invalid user", 404);
+  // const user = await userRepo.findOneBy({ id: userId });
+  // if (!user) throw new AppError("Invalid user", 404);
 
   const vehicle = await vehicleRepo.findOneBy({ id: vehicleId });
   if (!vehicle) throw new AppError("Vehicle not found", 404);

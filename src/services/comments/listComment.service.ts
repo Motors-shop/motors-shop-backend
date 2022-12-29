@@ -12,6 +12,9 @@ export const listCommentService = async (vehicleId: string): Promise<Object[]> =
     relations: {
       user: true,
     },
+    order: {
+      createdAt: "ASC",
+    },
   });
 
   const formatComments = comments.map((comment) => {
