@@ -2,7 +2,7 @@ import AppDataSource from "../../data-source";
 import { Vehicle } from "../../entities/vehicle.entity";
 import AppError from "../../errors/AppErros";
 
-export const retrieveVehicleService = async (vehicleId: string): Promise<Vehicle> => {
+export const retrieveVehicleService = async (vehicleId: string): Promise<Object> => {
   const vehicleRepository = AppDataSource.getRepository(Vehicle);
 
   const vehicle = await vehicleRepository.findOne({
@@ -14,5 +14,5 @@ export const retrieveVehicleService = async (vehicleId: string): Promise<Vehicle
     throw new AppError("Vehicle not found", 404);
   }
 
-  return vehicle;
+  return { ...vehicle, owner: vehicle.owner.id };
 };
