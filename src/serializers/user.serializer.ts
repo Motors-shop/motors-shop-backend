@@ -7,7 +7,7 @@ export const createUserSerializer = yup.object().shape({
   phone: yup.string().required(),
   birthDate: yup.date().required(),
   biography: yup.string().default(""),
-  accountType: yup.string().required(),
+  accountType: yup.string().default("COMPRADOR"),
   password: yup.string().required(),
   address: yup.object().shape({
     cep: yup.string().required(),

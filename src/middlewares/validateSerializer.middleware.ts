@@ -6,7 +6,10 @@ const validateSerializerMiddleware =
   (serializer: yup.AnyObjectSchema) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validatedBody: IUserRequest = await serializer.validate(req.body);
+      const validatedBody: IUserRequest = await serializer.validate(req.body, {
+        stripUnknown: true,
+        abortEarly: false,
+      });
 
       req.body = validatedBody;
 

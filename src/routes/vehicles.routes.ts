@@ -6,16 +6,31 @@ import { listSessionVehiclesController } from "../controllers/vehicles/listSessi
 import { listUserPublishedVehiclesController } from "../controllers/vehicles/listUserPublishedVehicles.controller";
 import { patchVehicleController } from "../controllers/vehicles/patchVehicle.controller";
 import { retrieveVehicleController } from "../controllers/vehicles/retrieveVehicle.controller";
-
+import { ensureAuthMiddleware } from "../middlewares/ensureAuth.middleware";
+import validateSerializerMiddleware from "../middlewares/validateSerializer.middleware";
+import { createVehicleSerializer, updateVehicleSerializer } from "../serializers/vehicle.serializer";
 
 const vehiclesRoutes = Router();
 
-vehiclesRoutes.post("", createVehicleController);
+vehiclesRoutes.post(
+  "",
+  ensureAuthMiddleware,
+  validateSerializerMiddleware(createVehicleSerializer),
+  createVehicleController
+);
 vehiclesRoutes.get("", listAllPublishedVehiclesController);
 vehiclesRoutes.get("/:id", retrieveVehicleController);
 vehiclesRoutes.get("/user/:id", listUserPublishedVehiclesController);
-vehiclesRoutes.get("/session/user", listSessionVehiclesController);
-vehiclesRoutes.patch("/:id", patchVehicleController);
-vehiclesRoutes.delete("/:id", deleteVehicleController);
+vehiclesRoutes.get(
+  "/session/user",
+  ensureAuthMiddleware,
+  listSessionVehiclesController
+);
+vehiclesRoutes.patch(
+  "/:id",
+  validateSerializerMiddleware(updateVehicleSerializer),
+  patchVehicleController
+);
+vehiclesRoutes.delete("/:id", ensureAuthMiddleware, deleteVehicleController);
 
 export default vehiclesRoutes;
