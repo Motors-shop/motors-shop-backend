@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import {
   Column,
   CreateDateColumn,
@@ -36,6 +37,7 @@ export class User {
   @Column({ length: 12, default: "COMPRADOR" })
   accountType: string;
 
+  @Exclude()
   @Column({ length: 150 })
   password: string;
 
@@ -45,7 +47,7 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Address, { onDelete: "CASCADE" })
+  @ManyToOne(() => Address, { onDelete: "CASCADE", eager: true })
   address: Address;
 
   @OneToMany(() => Vehicle, (vehicle) => vehicle.owner, {
