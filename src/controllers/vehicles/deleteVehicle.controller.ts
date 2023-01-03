@@ -3,6 +3,7 @@ import { deleteVehicleService } from "../../services/vehicles/deleteVehicle.serv
 
 export const deleteVehicleController = async (req: Request, res: Response) => {
   const vehicleId = req.params.id;
-  await deleteVehicleService(vehicleId);
+  const { userId } = req.body;
+  await deleteVehicleService(vehicleId, userId);
   return res.json({ message: "Vehicle deleted" });
 };

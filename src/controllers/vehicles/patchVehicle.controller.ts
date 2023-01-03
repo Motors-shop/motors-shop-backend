@@ -3,6 +3,7 @@ import { patchVehicleService } from "../../services/vehicles/patchVehicle.servic
 
 export const patchVehicleController = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const newVehicle = await patchVehicleService(id, req.body);
+  const { userId, ...vehicleData } = req.body;
+  const newVehicle = await patchVehicleService(id, userId, vehicleData);
   return res.json(newVehicle);
 };

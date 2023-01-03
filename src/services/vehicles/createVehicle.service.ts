@@ -1,6 +1,8 @@
 import AppDataSource from "../../data-source";
 import { Photo } from "../../entities/photo.entity";
+import { User } from "../../entities/user.entity";
 import { Vehicle } from "../../entities/vehicle.entity";
+import AppError from "../../errors/AppErros";
 import { IVehicleRequest } from "../../interfaces/vehicles.interfaces";
 
 export const createVehicleService = async (
@@ -9,19 +11,22 @@ export const createVehicleService = async (
 ): Promise<Vehicle> => {
   const vehicleRepo = AppDataSource.getRepository(Vehicle);
   const photoRepo = AppDataSource.getRepository(Photo);
-  // const userRepo = AppDataSource.getRepository(User);
+  const userRepo = AppDataSource.getRepository(User);
+  console.log(vehicle, userId)
 
-  // const foundUser = await userRepo.findOneBy({ id: userId });
-  // if (!foundUser) throw new AppError("Invalid user", 404);
+  const foundUser = await userRepo.findOneBy({ id: userId });
+  if (!foundUser) throw new AppError("Invalid user", 404);
+  // if (foundUser.accountType !== "COMPRADOR") throw new AppError("Account has not permission to perform action", 404)
 
-  // TODO: use foundUser at `owner`
-  const newVehicle = await vehicleRepo.save(vehicle);
+  const newVehicle = await vehicleRepo.save({ ...vehicle, owner: foundUser });
 
-  for (let i = 0; i < vehicle.photos.length; i++) {
-    await photoRepo.save({ url: String(vehicle.photos[i]), vehicle: newVehicle });
-  }
+  await Promise.all(
+    vehicle.photos.map(async (photo) => {
+      await photoRepo.save({ url: photo.url, vehicle: newVehicle });
+    })
+  );
 
-  const finalVehicle = await vehicleRepo.findOne({ where: { id: newVehicle.id } });
+  const finalVehicle = await vehicleRepo.findOneBy({ id: newVehicle.id });
 
   return finalVehicle!;
 };

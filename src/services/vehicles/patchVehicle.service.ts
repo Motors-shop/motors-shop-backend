@@ -5,19 +5,18 @@ import { IVehicleRequest } from "../../interfaces/vehicles.interfaces";
 
 export const patchVehicleService = async (
   vehicleId: string,
+  userId: string,
   vehicleBody: IVehicleRequest
 ): Promise<Vehicle> => {
   const vehicleRepo = AppDataSource.getRepository(Vehicle);
-  // const userRepo = AppDataSource.getRepository(User);
 
-  // const foundUser = await userRepo.findOneBy({ id: userId });
-  // if (!foundUser) throw new AppError("Invalid user", 404);
-
-  const foundVehicle = await vehicleRepo.findOneBy({ id: vehicleId });
+  const foundVehicle = await vehicleRepo.findOne({
+    where: { id: vehicleId, owner: { id: userId } },
+  });
   if (!foundVehicle) throw new AppError("Vehicle does not exists", 404);
 
-  const newVehicle = vehicleRepo.create({ ...foundVehicle, ...vehicleBody });
-  const finalVehicle = vehicleRepo.save(newVehicle);
+  vehicleRepo.update(foundVehicle.id, vehicleBody);
+  const vehicle = await vehicleRepo.findOneBy({ id: vehicleId });
 
-  return finalVehicle;
+  return vehicle!;
 };
