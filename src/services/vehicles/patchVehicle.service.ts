@@ -15,7 +15,7 @@ export const patchVehicleService = async (
   });
   if (!foundVehicle) throw new AppError("Vehicle does not exists", 404);
 
-  vehicleRepo.update(foundVehicle.id, vehicleBody);
+  await vehicleRepo.update(foundVehicle.id, vehicleBody);
   const vehicle = await vehicleRepo.findOneBy({ id: vehicleId });
 
   return vehicle!;
