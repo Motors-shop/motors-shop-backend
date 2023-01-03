@@ -12,17 +12,18 @@ export const createVehicleService = async (
   const vehicleRepo = AppDataSource.getRepository(Vehicle);
   const photoRepo = AppDataSource.getRepository(Photo);
   const userRepo = AppDataSource.getRepository(User);
-  console.log(vehicle, userId)
 
   const foundUser = await userRepo.findOneBy({ id: userId });
   if (!foundUser) throw new AppError("Invalid user", 404);
-  // if (foundUser.accountType !== "COMPRADOR") throw new AppError("Account has not permission to perform action", 404)
+
+  if (foundUser.accountType === "COMPRADOR")
+    throw new AppError("Account has not permission to perform action", 404);
 
   const newVehicle = await vehicleRepo.save({ ...vehicle, owner: foundUser });
 
   await Promise.all(
     vehicle.photos.map(async (photo) => {
-      await photoRepo.save({ url: photo.url, vehicle: newVehicle });
+      await photoRepo.save({ url: String(photo), vehicle: newVehicle });
     })
   );
 

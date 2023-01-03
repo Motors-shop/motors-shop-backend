@@ -8,7 +8,10 @@ import { patchVehicleController } from "../controllers/vehicles/patchVehicle.con
 import { retrieveVehicleController } from "../controllers/vehicles/retrieveVehicle.controller";
 import { ensureAuthMiddleware } from "../middlewares/ensureAuth.middleware";
 import validateSerializerMiddleware from "../middlewares/validateSerializer.middleware";
-import { createVehicleSerializer, updateVehicleSerializer } from "../serializers/vehicle.serializer";
+import {
+  createVehicleSerializer,
+  updateVehicleSerializer,
+} from "../serializers/vehicle.serializer";
 
 const vehiclesRoutes = Router();
 
@@ -21,13 +24,10 @@ vehiclesRoutes.post(
 vehiclesRoutes.get("", listAllPublishedVehiclesController);
 vehiclesRoutes.get("/:id", retrieveVehicleController);
 vehiclesRoutes.get("/user/:id", listUserPublishedVehiclesController);
-vehiclesRoutes.get(
-  "/session/user",
-  ensureAuthMiddleware,
-  listSessionVehiclesController
-);
+vehiclesRoutes.get("/session/user", ensureAuthMiddleware, listSessionVehiclesController);
 vehiclesRoutes.patch(
   "/:id",
+  ensureAuthMiddleware,
   validateSerializerMiddleware(updateVehicleSerializer),
   patchVehicleController
 );

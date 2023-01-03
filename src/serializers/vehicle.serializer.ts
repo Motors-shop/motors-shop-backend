@@ -10,11 +10,7 @@ export const createVehicleSerializer = yup.object().shape({
   type: yup.string().required(),
   isPublished: yup.boolean(),
   capeImage: yup.string().required(),
-  photos: yup.array().of(
-    yup.object().shape({
-      url: yup.string(),
-    })
-  ),
+  photos: yup.array().of(yup.string()),
   userId: yup.string(),
 });
 
