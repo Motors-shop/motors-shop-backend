@@ -1,15 +1,17 @@
 import AppDataSource from "../../data-source";
-import { User } from "../../entities/user.entity";
+import { Address } from "../../entities/address.entity";
 import AppError from "../../errors/AppErros";
 
 export const deleteUserService = async (userId: string) => {
-  const userRepository = AppDataSource.getRepository(User);
+  const addressRepository = AppDataSource.getRepository(Address);
 
-  const user = await userRepository.findOneBy({ id: userId });
+  const address = await addressRepository.findOne({
+    where: { user: { id: userId } },
+  });
 
-  if (!user) {
+  if (!address) {
     throw new AppError("User not found", 404);
   }
 
-  await userRepository.delete(userId);
+  await addressRepository.remove(address);
 };

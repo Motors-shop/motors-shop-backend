@@ -17,7 +17,7 @@ export class Vehicle {
   id: string;
 
   @Column({ default: "VENDA", length: 12 })
-  sellType: "VENDA" | "LEILAO";
+  sellType: "VENDA" | "LEILÃO";
 
   @Column({ length: 150 })
   title: string;
