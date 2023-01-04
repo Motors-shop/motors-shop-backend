@@ -15,6 +15,17 @@ export const createUserSerializer = yup.object().shape({
     city: yup.string().required(),
     street: yup.string().required(),
     number: yup.string().required(),
-    complement: yup.string().required(),
+    complement: yup.string().default(""),
   }),
 });
+
+export const updateUserSerializer = yup.object().shape({
+  name: yup.string(),
+  email: yup.string().email(),
+  cpf: yup.string(),
+  phone: yup.string(),
+  birthDate: yup.date(),
+  biography: yup.string(),
+  accountType: yup.string(),
+  password: yup.string(),
+})

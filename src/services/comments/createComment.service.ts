@@ -22,7 +22,7 @@ export const createCommentService = async (
   });
   if (!vehicle) throw new AppError("Vehicle not found", 404);
   if (vehicle.owner.id === userId) {
-    throw new AppError("Cannot comment own announcement", 404);
+    throw new AppError("Cannot comment own announcement");
   }
 
   const alreadyCommented = await commentRepo.findOne({
