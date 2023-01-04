@@ -31,7 +31,12 @@ export const createCommentService = async (
 
   if (alreadyCommented) throw new AppError("One comment per announcement", 404);
 
-  const comment = await commentRepo.save({ commentary: commentary, vehicle, user });
+  const comment = commentRepo.create({ commentary: commentary, vehicle, user });
+  await commentRepo.save(comment);
+  const createdComment = await commentRepo.findOne({
+    where: { id: comment.id },
+    relations: { vehicle: false, user: false },
+  });
 
-  return comment;
+  return createdComment!;
 };

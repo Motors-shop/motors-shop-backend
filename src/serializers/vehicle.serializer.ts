@@ -25,4 +25,5 @@ export const updateVehicleSerializer = yup.object().shape({
   isPublished: yup.boolean(),
   capeImage: yup.string(),
   userId: yup.string(),
+  photos: yup.array().of(yup.string()),
 });
