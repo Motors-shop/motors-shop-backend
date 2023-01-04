@@ -28,4 +28,5 @@ export const updateUserSerializer = yup.object().shape({
   biography: yup.string(),
   accountType: yup.string(),
   password: yup.string(),
+  userId: yup.string(),
 })
