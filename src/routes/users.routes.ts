@@ -2,6 +2,7 @@ import { Router } from "express";
 import { updateAddressController } from "../controllers/address/updateAddress.controller";
 import { createUserController } from "../controllers/users/createUser.controller";
 import { deleteUserController } from "../controllers/users/deleteUser.controller";
+import { retrieveUserController } from "../controllers/users/retrieveUser.controller";
 import { updateUserController } from "../controllers/users/updateUser.controller";
 import { ensureAuthMiddleware } from "../middlewares/ensureAuth.middleware";
 import validateSerializerMiddleware from "../middlewares/validateSerializer.middleware";
@@ -31,5 +32,6 @@ userRoutes.patch(
   validateSerializerMiddleware(updateAddressSerializer),
   updateAddressController
 );
+userRoutes.get("/:id", retrieveUserController);
 
 export default userRoutes;

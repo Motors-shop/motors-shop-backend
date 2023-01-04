@@ -19,11 +19,16 @@ export const createVehicleService = async (
   if (foundUser.accountType === "COMPRADOR")
     throw new AppError("Account has not permission to perform action", 404);
 
-  const newVehicle = await vehicleRepo.save({ ...vehicle, owner: foundUser });
+  const { photos, ...vehicleData } = vehicle;
+
+  const newVehicle = await vehicleRepo.save({
+    ...vehicleData,
+    owner: foundUser,
+  });
 
   await Promise.all(
-    vehicle.photos.map(async (photo) => {
-      await photoRepo.save({ url: String(photo), vehicle: newVehicle });
+    photos.map(async (photo) => {
+      await photoRepo.save({ url: photo, vehicle: newVehicle });
     })
   );
 

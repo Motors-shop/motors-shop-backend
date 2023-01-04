@@ -7,9 +7,10 @@ type VehicleRequestOmittedFields =
   | "sellType"
   | "createdAt"
   | "updatedAt"
+  | "photos"
   | VehicleRequestOptionalFields;
 
 type VehicleRequestOptionalFields = "sellType" | "isPublished";
 
 export type IVehicleRequest = Partial<Pick<Vehicle, VehicleRequestOptionalFields>> &
-  Omit<Vehicle, VehicleRequestOmittedFields>;
+  Omit<Vehicle, VehicleRequestOmittedFields> & { photos: string[] };
