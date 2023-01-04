@@ -3,8 +3,9 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
+  JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -47,7 +48,8 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Address, { onDelete: "CASCADE", eager: true })
+  @OneToOne(() => Address, { onDelete: "CASCADE", eager: true })
+  @JoinColumn()
   address: Address;
 
   @OneToMany(() => Vehicle, (vehicle) => vehicle.owner, {
