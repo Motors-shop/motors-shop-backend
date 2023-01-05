@@ -3,6 +3,6 @@ import { updateAddressService } from "../../services/address/updateAddress.servi
 
 export const updateAddressController = async (req: Request, res: Response) => {
   const { userId, ...addressData } = req.body;
-  const address = updateAddressService(userId, addressData);
+  const address = await updateAddressService(userId, addressData);
   return res.json(address);
 };
