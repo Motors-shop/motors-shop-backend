@@ -16,7 +16,7 @@ export const listUserVehiclesService = async (
   }
 
   const vehicles = await vehicleRepository.find({
-    where: { owner: { id: userId }, isPublished: true },
+    where: { owner: { id: userId } },
   });
 
   return vehicles;
