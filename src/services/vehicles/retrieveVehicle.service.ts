@@ -14,5 +14,5 @@ export const retrieveVehicleService = async (vehicleId: string): Promise<Object>
     throw new AppError("Vehicle not found", 404);
   }
 
-  return { ...vehicle, owner: vehicle.owner.id };
+  return vehicle;
 };
