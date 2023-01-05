@@ -3,7 +3,7 @@ import { User } from "../../entities/user.entity";
 import { Vehicle } from "../../entities/vehicle.entity";
 import AppError from "../../errors/AppErros";
 
-export const listUserPublishedVehiclesService = async (
+export const listUserVehiclesService = async (
   userId: string
 ): Promise<Vehicle[]> => {
   const vehicleRepository = AppDataSource.getRepository(Vehicle);
