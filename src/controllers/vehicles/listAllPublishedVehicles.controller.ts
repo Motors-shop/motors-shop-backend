@@ -1,3 +1,4 @@
+import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import { listAllPublishedVehiclesService } from "../../services/vehicles/listAllPublishedVehicles.service";
 
@@ -6,5 +7,5 @@ export const listAllPublishedVehiclesController = async (
   res: Response
 ) => {
   const vehicles = await listAllPublishedVehiclesService();
-  return res.json(vehicles);
+  return res.json(instanceToPlain(vehicles));
 };
