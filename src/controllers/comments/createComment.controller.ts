@@ -6,5 +6,5 @@ export const createCommentController = async (req: Request, res: Response) => {
   const vehicleId = req.params.id;
   const comment = await createCommentService(commentary, userId, vehicleId);
 
-  return res.json(comment);
+  return res.status(201).json(comment);
 };

@@ -29,7 +29,7 @@ export const createCommentService = async (
     where: { vehicle: { id: vehicleId }, user: { id: userId } },
   });
 
-  if (alreadyCommented) throw new AppError("One comment per announcement", 404);
+  if (alreadyCommented) throw new AppError("One comment per announcement");
 
   const comment = commentRepo.create({ commentary: commentary, vehicle, user });
   await commentRepo.save(comment);
