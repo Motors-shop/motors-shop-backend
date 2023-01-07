@@ -18,7 +18,7 @@ export const listCommentService = async (vehicleId: string): Promise<Object[]> =
   });
 
   const formatComments = comments.map((comment) => {
-    return { ...comment, user: comment.user.name };
+    return { ...comment, user: { id: comment.user.id, name: comment.user.name } };
   });
 
   return formatComments;
