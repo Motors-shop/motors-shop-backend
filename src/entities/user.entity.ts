@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Address } from "./address.entity";
+import { RestoreCodes } from "./restoreCodes.entity";
 import { Vehicle } from "./vehicle.entity";
 
 @Entity("users")
@@ -56,4 +57,7 @@ export class User {
     eager: true,
   })
   vehicles: Vehicle[];
+
+  @OneToMany(() => RestoreCodes, (r) => r.issuer, { nullable: true })
+  restoreCode: RestoreCodes[];
 }
