@@ -31,7 +31,7 @@ export class Vehicle {
   @Column("integer")
   km: number;
 
-  @Column("decimal", { precision: 12, scale: 2 })
+  @Column({ width: 12 })
   price: number;
 
   @Column({ length: 12 })

@@ -24,10 +24,10 @@ export class User {
   @Column({ length: 120, unique: true })
   email: string;
 
-  @Column({ length: 11, unique: true })
+  @Column({ length: 14, unique: true })
   cpf: string;
 
-  @Column({ length: 11 })
+  @Column({ length: 15 })
   phone: string;
 
   @Column()
