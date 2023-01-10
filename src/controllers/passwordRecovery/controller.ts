@@ -11,7 +11,7 @@ export const passwordRecoveryController = async (
   console.log("-----------------------------")
   const { email } = req.body;
   await sendRecoveryEmailService(email);
-  res.status(200).send({message: "Email enviado"});
+  res.status(200).send({message: "Email sent"});
 };
 
 export const createRecoveryTokenController = async (
