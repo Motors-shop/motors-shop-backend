@@ -8,7 +8,6 @@ export const passwordRecoveryController = async (
 ) => {
   const { targetEmail, targetCode } = req.query;
   if (targetEmail && targetCode) return createRecoveryTokenController(req, res);
-  console.log("-----------------------------")
   const { email } = req.body;
   await sendRecoveryEmailService(email);
   res.status(200).send({message: "Email sent"});
