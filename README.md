@@ -14,13 +14,15 @@ A aplicação permite que um usuário logado crie um novo veículo ou comentári
 yarn ou yarn install
 ```
 
-2. Rodando as migrações
+2. Criando e preenchendo um .env seguindo o exemplo do .env.example
+
+3. Rodando as migrações
 
 ```bash
 yarn typeorm migration:run -d src/data-source
 ```
 
-3. Iniciando a aplicação
+4. Iniciando a aplicação
 
 ```
 yarn dev
