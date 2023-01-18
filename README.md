@@ -31,3 +31,6 @@ yarn dev
 Abra [http://localhost:3333/](http://localhost:3333/) para visualizá-lo no navegador.
 
 Para parar a execução precione `Ctrl + c`
+
+# Documentação das rotas
+ A documentação das rotas pode ser visualizada acessando este [Link](https://motors-shop.github.io/motor-shop-documentation/).
